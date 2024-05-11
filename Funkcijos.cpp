@@ -9,7 +9,7 @@
 #include <random>
 using namespace std;
 
-double median(const vector<double>& arr) {
+double median( vector<double>& arr) {
     vector<double> temp = arr;
     sort(temp.begin(), temp.end());
     int size = temp.size();
@@ -20,87 +20,83 @@ double median(const vector<double>& arr) {
     }
 }
 
-void generuotiBalus(vector<double>& nd_rezultatai, double& eg) {
-    random_device rd;
-    mt19937 gen(rd());
-    uniform_int_distribution<> nd_distribution(1, 10);
-    uniform_int_distribution<> eg_distribution(1, 10);
-
-    for (size_t i = 0; i < nd_rezultatai.size(); ++i) {
-        nd_rezultatai[i] = nd_distribution(gen);
-    }
-    eg = eg_distribution(gen);
+void generuotiBalus(Studentas& studentas) {
+    int a;
+    a=rand() % 10 + 1;
+    for(int i = 0 ; i < a ; i++){
+    studentas.addNd(rand() % 10 + 1);
+}
+    studentas.setEg(rand() % 10 + 1);
 }
 
-void atspausdintiDuomenis(const vector<Duomenys>& A, bool iFaila) {
+void atspausdintiDuomenis( vector<Studentas>& A, bool iFaila) {
     if (iFaila) {
         ofstream out("Isvedimas.txt");
         out << "Vardas" << "         " << "Pavarde" << "        " << "Galutinis (Vid.)" << "        " << "Galutinis (Med.)" << endl;
         out << "------------------------------------------------------------------------" << endl;
-        for (const auto& studentas : A) {
-            out << left << setw(15) << studentas.vardas << left << setw(15) << studentas.pavarde << left << setw(15) << setprecision(3) << studentas.galutinis <<  "         " << left << setw(15) << setprecision(3) <<  studentas.mediana << endl;
+        for ( auto& studentas : A) {
+            out << left << setw(15) << studentas.getVardas() << left << setw(15) << studentas.getPavarde() << left << setw(15) << setprecision(3) << studentas.getGalutinis() <<  "         " << left << setw(15) << setprecision(3) <<  studentas.getMediana() << endl;
         }
         out.close();
-        cout << "Duomenys irasyti i faila 'Isvedimas.txt'" << endl;
+        cout << "Studentas irasyti i faila 'Isvedimas.txt'" << endl;
     } else {
         cout << "Vardas" << "         " << "Pavarde" << "        " << "Galutinis (Vid.)" << "        " << "Galutinis (Med.)" << endl;
         cout << "------------------------------------------------------------------------" << endl;
-        for (const auto& studentas : A) {
-            cout << left << setw(15) << studentas.vardas << left << setw(15) << studentas.pavarde << left << setw(15) << setprecision(3) << studentas.galutinis <<  "         " << left << setw(15) << setprecision(3) <<  studentas.mediana << endl;
+        for ( auto& studentas : A) {
+            cout << left << setw(15) << studentas.getVardas() << left << setw(15) << studentas.getPavarde() << left << setw(15) << setprecision(3) << studentas.getGalutinis() <<  "         " << left << setw(15) << setprecision(3) <<  studentas.getMediana() << endl;
         }
     }
 }
 
-void rikiuotiPagalVarda(vector<Duomenys>& A) {
-    sort(A.begin(), A.end(), [](const Duomenys& a, const Duomenys& b) {
-        return a.vardas < b.vardas;
+void rikiuotiPagalVarda(vector<Studentas>& A) {
+    sort(A.begin(), A.end(), []( Studentas& a,  Studentas& b) {
+        return a.getVardas() < b.getVardas();
     });
 }
 
-void rikiuotiPagalPavarde(vector<Duomenys>& A) {
-    sort(A.begin(), A.end(), [](const Duomenys& a, const Duomenys& b) {
-        return a.pavarde < b.pavarde;
+void rikiuotiPagalPavarde(vector<Studentas>& A) {
+    sort(A.begin(), A.end(), []( Studentas& a,  Studentas& b) {
+        return a.getPavarde() < b.getPavarde();
     });
 }
 
-void rikiuotiPagalGalutiniVidurki(vector<Duomenys>& A) {
-    sort(A.begin(), A.end(), [](const Duomenys& a, const Duomenys& b) {
-        return a.galutinis < b.galutinis;
+void rikiuotiPagalGalutiniVidurki(vector<Studentas>& A) {
+    sort(A.begin(), A.end(), []( Studentas& a,  Studentas& b) {
+        return a.getGalutinis() < b.getGalutinis();
     });
 }
 
-void rikiuotiPagalMediana(vector<Duomenys>& A) {
-    sort(A.begin(), A.end(), [](const Duomenys& a, const Duomenys& b) {
-        return a.mediana < b.mediana;
+void rikiuotiPagalMediana(vector<Studentas>& A) {
+    sort(A.begin(), A.end(), []( Studentas& a,  Studentas& b) {
+        return a.getMediana() < b.getMediana();
     });
 }
 
-void skaitytiIsFailo(vector<Duomenys>& A, const string& failoPavadinimas) {
+void skaitytiIsFailo(vector<Studentas>& A,  string& failoPavadinimas) {
     ifstream failas(failoPavadinimas);
 
     if (!failas.is_open()) {
         throw runtime_error("Klaida: Nepavyko atidaryti failo " + failoPavadinimas);
     }
 
-    string eilute;
+    string eilute, temp3, temp4;
     getline(failas, eilute); // Praleisti pirma eilute
     while (getline(failas, eilute)) {
         istringstream eilutesSrautas(eilute);
-        Duomenys naujas;
-        eilutesSrautas >> naujas.vardas >> naujas.pavarde;
+        Studentas naujas;
+        eilutesSrautas >> temp3 >> temp4;
+        naujas.setVardas(temp3);
+        naujas.setPavarde(temp4);
         double pazymys;
         while (eilutesSrautas >> pazymys) {
-            naujas.nd.push_back(pazymys);
+            naujas.addNd(pazymys);
         }
-        if (!naujas.nd.empty()) {
-            naujas.eg = naujas.nd.back();
-            naujas.nd.pop_back();
-        }
-        naujas.ndvid = accumulate(naujas.nd.begin(), naujas.nd.end(), 0.0) / naujas.nd.size();
-        vector<double> visiRezultatai = naujas.nd;
-        visiRezultatai.push_back(naujas.eg);
-        naujas.mediana = median(visiRezultatai);
-        naujas.galutinis = 0.4 * naujas.ndvid + 0.6 * naujas.eg;
+        naujas.setEgzFromNd();
+        vector<double> visiRezultatai = naujas.getNd();
+        naujas.setNdvid(accumulate(visiRezultatai.begin(), visiRezultatai.end(), 0.0) / visiRezultatai.size());
+        visiRezultatai.push_back(naujas.getEg());
+        naujas.setMediana(median(visiRezultatai));
+        naujas.setGalutinis(0.4 * naujas.getNdvid() + 0.6 * naujas.getEg());
         A.push_back(naujas);
     }
     failas.close();
@@ -138,7 +134,7 @@ for (int i = 0; i < irasu_skaicius; ++i) {
     cout << "Failas " << failo_pavadinimas << " sukurtas sekmingai." << endl;
 }
 
-void rikiuotiStudentus(vector<Duomenys>& geri_studentai, vector<Duomenys>& blogi_studentai) {
+void rikiuotiStudentus(vector<Studentas>& geri_studentai, vector<Studentas>& blogi_studentai) {
     int rikiavimoPasirinkimas;
     cout << "Pasirinkite, kaip rikiuoti studentus:" << endl;
     cout << "1. Pagal varda" << endl;
@@ -149,32 +145,32 @@ void rikiuotiStudentus(vector<Duomenys>& geri_studentai, vector<Duomenys>& blogi
     cin >> rikiavimoPasirinkimas;
 
     if (rikiavimoPasirinkimas == 1) {
-        sort(geri_studentai.begin(), geri_studentai.end(), [](const Duomenys& a, const Duomenys& b) {
-            return a.vardas < b.vardas;
+        sort(geri_studentai.begin(), geri_studentai.end(), []( Studentas& a,  Studentas& b) {
+            return a.getVardas() < b.getVardas();
         });
-        sort(blogi_studentai.begin(), blogi_studentai.end(), [](const Duomenys& a, const Duomenys& b) {
-            return a.vardas < b.vardas;
+        sort(blogi_studentai.begin(), blogi_studentai.end(), []( Studentas& a,  Studentas& b) {
+            return a.getVardas() < b.getVardas();
         });
     } else if (rikiavimoPasirinkimas == 2) {
-        sort(geri_studentai.begin(), geri_studentai.end(), [](const Duomenys& a, const Duomenys& b) {
-            return a.pavarde < b.pavarde;
+        sort(geri_studentai.begin(), geri_studentai.end(), []( Studentas& a,  Studentas& b) {
+            return a.getPavarde() < b.getPavarde();
         });
-        sort(blogi_studentai.begin(), blogi_studentai.end(), [](const Duomenys& a, const Duomenys& b) {
-            return a.pavarde < b.pavarde;
+        sort(blogi_studentai.begin(), blogi_studentai.end(), []( Studentas& a,  Studentas& b) {
+            return a.getPavarde() < b.getPavarde();
         });
     } else if (rikiavimoPasirinkimas == 3) {
-        sort(geri_studentai.begin(), geri_studentai.end(), [](const Duomenys& a, const Duomenys& b) {
-            return a.galutinis > b.galutinis;
+        sort(geri_studentai.begin(), geri_studentai.end(), []( Studentas& a,  Studentas& b) {
+            return a.getGalutinis() > b.getGalutinis();
         });
-        sort(blogi_studentai.begin(), blogi_studentai.end(), [](const Duomenys& a, const Duomenys& b) {
-            return a.galutinis > b.galutinis;
+        sort(blogi_studentai.begin(), blogi_studentai.end(), []( Studentas& a,  Studentas& b) {
+            return a.getGalutinis() > b.getGalutinis();
         });
     } else if (rikiavimoPasirinkimas == 4) {
-        sort(geri_studentai.begin(), geri_studentai.end(), [](const Duomenys& a, const Duomenys& b) {
-            return a.mediana > b.mediana;
+        sort(geri_studentai.begin(), geri_studentai.end(), []( Studentas& a,  Studentas& b) {
+            return a.getMediana() > b.getMediana();
         });
-        sort(blogi_studentai.begin(), blogi_studentai.end(), [](const Duomenys& a, const Duomenys& b) {
-            return a.mediana > b.mediana;
+        sort(blogi_studentai.begin(), blogi_studentai.end(), []( Studentas& a,  Studentas& b) {
+            return a.getMediana() > b.getMediana();
         });
     } else {
         cout << "Netinkamas pasirinkimas!" << endl;
@@ -189,8 +185,8 @@ void rikiuotiStudentus(vector<Duomenys>& geri_studentai, vector<Duomenys>& blogi
     }
     geri_failas << "Geri studentai:" << endl;
     geri_failas << "Vardas         Pavarde       (Vid.)        (Med.)" << endl;
-    for (const auto& studentas : geri_studentai) {
-        geri_failas << left << setw(15) << studentas.vardas << setw(15) << studentas.pavarde << setw(15) << setprecision(3) << studentas.galutinis << setw(15) << setprecision(3) << studentas.mediana << endl;
+    for ( auto& studentas : geri_studentai) {
+        geri_failas << left << setw(15) << studentas.getVardas() << setw(15) << studentas.getPavarde() << setw(15) << setprecision(3) << studentas.getGalutinis() << setw(15) << setprecision(3) << studentas.getMediana() << endl;
     }
     geri_failas.close();
     auto geri_end = chrono::high_resolution_clock::now();
@@ -209,8 +205,8 @@ void rikiuotiStudentus(vector<Duomenys>& geri_studentai, vector<Duomenys>& blogi
     }
     blogi_failas << "Blogi studentai:" << endl;
     blogi_failas << "Vardas         Pavarde       (Vid.)        (Med.)" << endl;
-    for (const auto& studentas : blogi_studentai) {
-    blogi_failas << left << setw(15) << studentas.vardas << setw(15) << studentas.pavarde << setw(15) << setprecision(3) << studentas.galutinis << setw(15) << setprecision(3) << studentas.mediana << endl;
+    for ( auto& studentas : blogi_studentai) {
+    blogi_failas << left << setw(15) << studentas.getVardas() << setw(15) << studentas.getPavarde() << setw(15) << setprecision(3) << studentas.getGalutinis() << setw(15) << setprecision(3) << studentas.getMediana() << endl;
     }
     blogi_failas.close();
     auto blogi_end = chrono::high_resolution_clock::now();
