@@ -12,7 +12,7 @@ using namespace std;
 
 int main() {
     int choice;
-    vector<Duomenys> A;
+    vector<Studentas> A;
 
     while (true) {
         cout << "Pasirinkite veiksma: " << endl;
@@ -36,11 +36,15 @@ int main() {
         }
 
         if (choice == 1) {
-            Duomenys naujas;
+            string temp, temp1;
+            double temp2;
+            Studentas naujas;
             cout << "Iveskite varda: ";
-            cin >> naujas.vardas;
+            cin >> temp;
+            naujas.setVardas(temp);
             cout << "Iveskite pavarde: ";
-            cin >> naujas.pavarde;
+            cin >> temp1;
+            naujas.setPavarde(temp1);
             cout << "Iveskite kiek namu darbu rezultatu norite suvesti: ";
             int nd_sk;
             for (int i = 0; i < 1; ++i) {
@@ -52,45 +56,44 @@ int main() {
                     i--; // Pakartotinai įvedimas to paties elemento
                 }
             }
-            naujas.nd.resize(nd_sk);
             cout << "Iveskite namu darbu rezultatus (nuo 1 iki 10): ";
             for (int i = 0; i < nd_sk; ++i) {
-                cin >> naujas.nd[i];
-                if (naujas.nd[i] < 1 || naujas.nd[i] > 10 || cin.fail()) {
+                cin >> temp2;
+                if (temp2 < 1 || temp2 > 10 || cin.fail()) {
                     cout << "Klaida: Ivestas netinkamas skaicius. Prasome ivesti sveikaji skaiciu nuo 1 iki 10." << endl;
                     cin.clear();
                     cin.ignore(numeric_limits<streamsize>::max(), '\n');
                     i--; // Pakartotinai įvedimas to paties elemento
+                }
+                else {naujas.addNd(temp2);
                 }
             }
 
             for (int i = 0; i < 1; ++i) {
                     cout << "Iveskite egzamino rezultata: ";
-                    cin >> naujas.eg;
-                if (naujas.eg < 1 || naujas.eg > 10 || cin.fail()) {
+                    cin >> temp2;
+                    //cin >> a;
+                    //naujas.setEg(a);
+                if (temp2 < 1 || temp2 > 10 || cin.fail()) {
                     cout << "Klaida: Ivestas netinkamas skaicius. Prasome ivesti sveikaji skaiciu nuo 1 iki 10." << endl;
                     cin.clear();
                     cin.ignore(numeric_limits<streamsize>::max(), '\n');
                     i--; // Pakartotinai įvedimas to paties elemento
                 }
+                else {naujas.setEg(temp2);
+                }
             }
 
             // Skaičiuojame namų darbų vidurkį
-            naujas.ndvid = 0;
-            for (size_t j = 0; j < naujas.nd.size(); j++) {
-                naujas.ndvid += naujas.nd[j];
-            }
-            naujas.ndvid /= naujas.nd.size();
+            naujas.calculateNdVid();
 
             // Skaičiuojame medianą iš visų rezultatų
-            vector<double> visiRezultatai = naujas.nd;
-            visiRezultatai.push_back(naujas.eg);
-            naujas.mediana = median(visiRezultatai);
-
+            vector<double> visiRezultatai = naujas.getNd();
+            visiRezultatai.push_back(naujas.getEg());
+            naujas.setMediana(median(visiRezultatai));
             // Skaičiuojame galutinį vidurkį
-            naujas.galutinis = 0.4 * naujas.ndvid + 0.6 * naujas.eg;
-
-            A.push_back(naujas);
+        naujas.setGalutinis(0.4 * naujas.getNdvid() + 0.6 * naujas.getEg());
+        A.push_back(naujas);
 
         } else if (choice == 2) {
             cout << "Kiek mokiniu duomenis sugeneruoti: ";
@@ -106,11 +109,14 @@ int main() {
             }
 
             for (int i = 0; i < n; i++) {
-                Duomenys naujas;
-                cout << "Iveskite varda: ";
-                cin >> naujas.vardas;
-                cout << "Iveskite pavarde: ";
-                cin >> naujas.pavarde;
+            Studentas naujas;
+            string temp, temp1;
+            cout << "Iveskite varda: ";
+            cin >> temp;
+            naujas.setVardas(temp);
+            cout << "Iveskite pavarde: ";
+            cin >> temp1;
+            naujas.setPavarde(temp1);
                 cout << "Iveskite kiek namu darbu rezultatu norite sugeneruoti: ";
                 int nd_sk;
                 for (int i = 0; i < 1; ++i) {
@@ -122,30 +128,25 @@ int main() {
                     i--; // Pakartotinai įvedimas to paties elemento
                 }
             }
-            naujas.nd.resize(nd_sk);
 
                 // Sugeneruojame atsitiktinius namų darbų rezultatus
-                for (size_t j = 0; j < naujas.nd.size(); j++) {
-                    naujas.nd[j] = rand() % 10 + 1; // Sugeneruojame rezultatus nuo 1 iki 10
+                for (size_t j = 0; j < nd_sk; j++) {
+                    naujas.addNd(rand() % 10 + 1);// Sugeneruojame rezultatus nuo 1 iki 10
                 }
 
                 // Sugeneruojame atsitiktinį egzamino rezultatą
-                naujas.eg = rand() % 10 + 1; // Sugeneruojame rezultatą nuo 1 iki 10
+                naujas.setEg(rand() % 10 + 1); // Sugeneruojame rezultatą nuo 1 iki 10
 
                 // Skaičiuojame namų darbų vidurkį
-                naujas.ndvid = 0;
-                for (size_t j = 0; j < naujas.nd.size(); j++) {
-                    naujas.ndvid += naujas.nd[j];
-                }
-                naujas.ndvid /= naujas.nd.size();
+                naujas.calculateNdVid();
 
                 // Skaičiuojame medianą iš visų rezultatų
-                vector<double> visiRezultatai = naujas.nd;
-                visiRezultatai.push_back(naujas.eg);
-                naujas.mediana = median(visiRezultatai);
+                vector<double> visiRezultatai = naujas.getNd();
+                visiRezultatai.push_back(naujas.getEg());
+                naujas.setMediana(median(visiRezultatai));
 
                 // Skaičiuojame galutinį vidurkį
-                naujas.galutinis = 0.4 * naujas.ndvid + 0.6 * naujas.eg;
+                naujas.setGalutinis(0.4 * naujas.getNdvid() + 0.6 * naujas.getEg());
 
                 A.push_back(naujas);
             }
@@ -164,26 +165,21 @@ int main() {
             }
 
             for (int i = 0; i < n; i++) {
-                Duomenys naujas;
-                naujas.nd.resize(rand() % 10 + 1); // Sugeneruoti atsitiktinį kiekį namų darbų rezultatų nuo 1 iki 10
-                generuotiBalus(naujas.nd, naujas.eg); // Sugeneruoti atsitiktinius namų darbų ir egzamino rezultatus
-                naujas.vardas = "Vardas" + to_string(i + 1); // Sugeneruoti atsitiktinį vardą
-                naujas.pavarde = "Pavarde" + to_string(i + 1); // Sugeneruoti atsitiktinę pavardę
+                Studentas naujas;
+                generuotiBalus(naujas); // Sugeneruoti atsitiktinius namų darbų ir egzamino rezultatus
+                naujas.setVardas("Vardas" + to_string(i + 1)); // Sugeneruoti atsitiktinį vardą
+                naujas.setPavarde("Pavarde" + to_string(i + 1)); // Sugeneruoti atsitiktinę pavardę
 
                 // Skaičiuojame namų darbų vidurkį
-                naujas.ndvid = 0;
-                for (size_t j = 0; j < naujas.nd.size(); j++) {
-                    naujas.ndvid += naujas.nd[j];
-                }
-                naujas.ndvid /= naujas.nd.size();
+                naujas.calculateNdVid();
 
                 // Skaičiuojame medianą iš visų rezultatų
-                vector<double> visiRezultatai = naujas.nd;
-                visiRezultatai.push_back(naujas.eg);
-                naujas.mediana = median(visiRezultatai);
+                vector<double> visiRezultatai = naujas.getNd();
+                visiRezultatai.push_back(naujas.getEg());
+                naujas.setMediana(median(visiRezultatai));
 
                 // Skaičiuojame galutinį vidurkį
-                naujas.galutinis = 0.4 * naujas.ndvid + 0.6 * naujas.eg;
+                naujas.setGalutinis(0.4 * naujas.getNdvid() + 0.6 * naujas.getEg());
 
                 A.push_back(naujas);
             }
@@ -199,7 +195,7 @@ int main() {
             auto end = chrono::high_resolution_clock::now();
             chrono::duration<double> diff = end - start;
             cout << "Failo nuskaitymas uztruko: " << diff.count() << " s" << endl;
-        } catch (const exception& e) {
+        } catch ( exception& e) {
             cout << e.what() << endl;
         }
         }else if (choice == 5) {
@@ -220,7 +216,7 @@ int main() {
             i--; // Pakartotinai įvedimas to paties elemento
             }
             }
-
+            auto start = chrono::high_resolution_clock::now();
             if (rikiavimoPasirinkimas == 1) {
                 rikiuotiPagalVarda(A);
             } else if (rikiavimoPasirinkimas == 2) {
@@ -232,6 +228,9 @@ int main() {
             } else {
                 cout << "Netinkamas pasirinkimas!" << endl;
             }
+            auto end = chrono::high_resolution_clock::now();
+            chrono::duration<double> diff = end - start;
+            cout << "Failo rusiavimas uztruko: " << diff.count() << " s" << endl;
         } else if (choice == 6) {
             int isvedimoPasirinkimas;
             cout << "Pasirinkite, kaip norite isvesti duomenis:" << endl;
@@ -266,15 +265,15 @@ int main() {
             cout << "Failo generavimas uztruko: " << diff.count() << " s" << endl;
 
         } else if (choice == 8) {
-            vector<Duomenys> geri_studentai;
-            vector<Duomenys> blogi_studentai;
+            vector<Studentas> geri_studentai;
+            vector<Studentas> blogi_studentai;
             int choice1;
             cout << "Pasirinkiti 1, 2 arba 3 strategija:";
             cin >> choice1;
             auto start = chrono::high_resolution_clock::now();
             if(choice1 == 1){
-            for (const auto& studentas : A) {
-            if (studentas.galutinis >= 5.0) {
+            for ( auto& studentas : A) {
+            if (studentas.getGalutinis() >= 5.0) {
             geri_studentai.push_back(studentas);
         } else {
             blogi_studentai.push_back(studentas);
@@ -283,7 +282,7 @@ int main() {
         }
             if (choice1 == 2){
             for (auto it = A.begin(); it != A.end(); ) {
-            if (it->galutinis >= 5.0) {
+            if (it->getGalutinis() >= 5.0) {
             ++it;
             } else {
             blogi_studentai.push_back(*it);
@@ -292,8 +291,8 @@ int main() {
             }
             }
             if (choice1 == 3) {
-    auto partition_point = std::partition(A.begin(), A.end(), [](const auto& studentas) {
-        return studentas.galutinis >= 5.0;
+    auto partition_point = std::partition(A.begin(), A.end(), []( auto& studentas) {
+        return studentas.getGalutinis() >= 5.0;
     });
 
     std::copy(A.begin(), partition_point, std::back_inserter(geri_studentai));
