@@ -1,25 +1,17 @@
 
 # Airidas
-
+## v0.4
 ## Kompiuterio parametrai
 AMD Ryzen 7 5700G  
 WDC PC SN530 SSD  
 NVIDIA GeForce RTX 3060 Ti  
-
-## Kodo paleidimo instrukcija
-Atsisiusti Source code(zip)  
-Kompiliuoti pasirinktą main.cpp kaip jums patogu
-Spausti ant sugeneruoto exe failo
-Jeigu neveikia, tuomet pažiūrėkite šį video ir pagal jį susikurkite projektus (kiekvienam projektui yra 3 failai, 2cpp ir 1h)  
-https://www.youtube.com/watch?v=_NethtgMc64&ab_channel=ProgrammingKnowledge2  (kaip pasiruošti codeblocks)  
-https://www.youtube.com/watch?v=c9WT8revSJY&ab_channel=StudyKorner  (kaip pasidaryti projektus)  
 ### Testavimas vyko su:
 1tūkst. studentų  
 10tūkst. studentų  
 100tūkst. studentų  
 1mil. studentų  
 10mil. studentų  
-## v0.4
+
 ## 1 Testas (Failų kūrimas ir jų uždarymas)   
 1000 įrašų failo generacija užtruko 0.0060138 s   
 10000 įrašų failo generacija užtruko 0.0418468 s   
@@ -166,4 +158,37 @@ Tai uztruko: 8.09913 s
 10000 studentų rūšiavimas užtruko 0.004 s.   
 100000 studentų rūšiavimas užtruko 0.0450113 s.   
 1000000 studentų rūšiavimas užtruko 0.45709 s.   
-10000000 studentų rūšiavimas užtruko 4.57462 s.   
+10000000 studentų rūšiavimas užtruko 4.57462 s.  
+
+## v1.1
+
+### O1:  
+Klase sukategorizavo 100000 per 0.0290074 s  
+Klase sukategorizavo 1000000 per 0.306071 s  
+Vektorius sukategorizavo 100000 per 0.0310085 s  
+Vektorius sukategorizavo 1000000 per 0.281051 s  
+
+### O2:
+Klase sukategorizavo 100000 per 0.029009 s  
+Klase sukategorizavo 1000000 per 0.300066 s  
+Vektorius sukategorizavo 100000 per 0.0319843 s  
+Vektorius sukategorizavo 1000000 per 0.285061 s  
+
+### O3:  
+Klase sukategorizavo 100000 per 0.0290086 s  
+Klase sukategorizavo 1000000 per 0.307069 s  
+Vektorius sukategorizavo 100000 per  0.0310062 s  
+Vektorius sukategorizavo 1000000 per 0.283061 s  
+
+### Be optimizatoriu:  
+Klase sukategorizavo 100000 per 0.0290085 s  
+Klase sukategorizavo 1000000 per 0.299479 s  
+Vektorius sukategorizavo 100000 per 0.0309837 s  
+Vektorius sukategorizavo 1000000 per 0.289064 s 
+
+## Failu dydziai:  
+
+| Dydis (KB) | O1   | O2   | O3   |
+|------------|------|------|------|
+| struct     | 287  | 291  | 289  |
+| class      | 281  | 283  | 286  |
