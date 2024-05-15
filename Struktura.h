@@ -107,15 +107,3 @@ void generuotiFailaSuStudentais(int irasuSkaicius);
 void rikiuotiStudentus(std::vector<Studentas>& geri_studentai, std::vector<Studentas>& blogi_studentai);
 
 #endif // STRUKTURA_H_INCLUDED
-/*
-Studentas a = Studentas();
-a.setVardas(Airidas);
-
-vector<Studentas> studentai;
-studentai.push_back(a);
-studentai.at(0).getVardas;
-Studentas b;
-b.setVardas(laurynas);
-b.getVardas();
-a.getVardas();
-*/
