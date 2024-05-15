@@ -1,8 +1,15 @@
 #ifndef STRUKTURA_H_INCLUDED
 #define STRUKTURA_H_INCLUDED
 
-#include <vector>
+#include <iostream>
 #include <string>
+#include <vector>
+#include <fstream>
+#include <iomanip>
+#include <algorithm>
+#include <chrono>
+#include <random>
+#include <sstream>
 
 class Studentas {
 private:
@@ -15,17 +22,46 @@ private:
     double mediana;
 
 public:
-    Studentas(){};
-    Studentas( std::string vardas1,  std::string pavarde1,  std::vector<double> nd1, double eg1){
-        vardas = vardas1;
-        pavarde = pavarde1;
-        nd = nd1;
-        eg = eg1;
-        ndvid = 0;
-        galutinis = 0;
-        mediana = 0;
-    };
+    // Constructors
+    Studentas() = default;
+    Studentas(const std::string& vardas1, const std::string& pavarde1, const std::vector<double>& nd1, double eg1) : vardas(vardas1), pavarde(pavarde1), nd(nd1), eg(eg1), ndvid(0), galutinis(0), mediana(0) {}
 
+    // Destructor
+    ~Studentas() = default;
+
+    // Copy Constructor
+    Studentas(const Studentas& other) : vardas(other.vardas), pavarde(other.pavarde), nd(other.nd), eg(other.eg), ndvid(other.ndvid), galutinis(other.galutinis), mediana(other.mediana) {}
+
+    // Copy Assignment Operator
+    Studentas& operator=(const Studentas& other) {
+        if (this != &other) {
+            vardas = other.vardas;
+            pavarde = other.pavarde;
+            nd = other.nd;
+            eg = other.eg;
+            ndvid = other.ndvid;
+            galutinis = other.galutinis;
+            mediana = other.mediana;
+        }
+        return *this;
+    }
+
+    // Move Constructor
+    Studentas(Studentas&& other) noexcept : vardas(std::move(other.vardas)), pavarde(std::move(other.pavarde)), nd(std::move(other.nd)), eg(other.eg), ndvid(other.ndvid), galutinis(other.galutinis), mediana(other.mediana) {}
+
+    // Move Assignment Operator
+    Studentas& operator=(Studentas&& other) noexcept {
+        if (this != &other) {
+            vardas = std::move(other.vardas);
+            pavarde = std::move(other.pavarde);
+            nd = std::move(other.nd);
+            eg = other.eg;
+            ndvid = other.ndvid;
+            galutinis = other.galutinis;
+            mediana = other.mediana;
+        }
+        return *this;
+    }
     void setVardas( std::string vardas1){
         vardas = vardas1;
     };
@@ -92,6 +128,23 @@ public:
         ndvid += nd[j];
         }
         ndvid /= nd.size();
+    }
+    friend std::ostream& operator<<(std::ostream& os, const Studentas& studentas) {
+        os << studentas.vardas << ' ' << studentas.pavarde << ' ';
+        for (auto& grade : studentas.nd) {
+            os << grade << ' ';
+        }
+        os << studentas.eg;
+        return os;
+    }
+
+    friend std::istream& operator>>(std::istream& is, Studentas& studentas) {
+        is >> studentas.vardas >> studentas.pavarde;
+        double grade;
+        while (is >> grade) {
+            studentas.nd.push_back(grade);
+        }
+        return is;
     }
 };
 
