@@ -215,3 +215,155 @@
         cout << "Blogi studentai isvesti i faila Blogi_studentai.txt" << endl;
         cout << "Tai uztruko: " << blogi_diff.count() << " s" << endl;
     }
+        void testConstructor()
+{
+        vector<double> temp{1, 2, 3, 4};
+        Studentas mok("Vardenis", "Pavardenis", temp, 9, 8, 7);
+        cout << ":" << endl;
+        if (mok.getVardas() == "Vardenis")
+        cout << "Vardas tinkamas!" << endl;
+        else
+        cout << "Vardas netinkamas!" << endl;
+        if (mok.getPavarde() == "Pavardenis")
+        cout << "Pavarde tinkama!" << endl;
+        else
+        cout << "Pavarde netinkama!" << endl;
+        if (mok.getNd() == temp)
+        cout << "Namu darbai tinkami!" << endl;
+        else
+        cout << "Namu darbai netinkami!" << endl;
+        if (mok.getEg() == 9)
+        cout << "Egzaminas tinkamas!" << endl;
+        else
+        cout << "Egzaminas netinkamas!" << endl;
+        if (mok.getGalutinis() == 8)
+        cout << "Vidurkis tinkamas!" << endl;
+        else
+        cout << "Vidurkis netinkamas!" << endl;
+        if (mok.getMediana() == 7)
+        cout << "Mediana tinkama!" << endl;
+        else
+        cout << "Mediana netinkama!" << endl;
+}
+    void testCopyConstructor()
+{
+        vector<double> temp{1, 2, 3, 4};
+        Studentas mok("Vardenis", "Pavardenis", temp, 9, 8, 7);
+        Studentas mok1 = mok;
+        if (mok1.getVardas() == "Vardenis")
+        cout << "Vardas tinkamas!" << endl;
+        else
+        cout << "Vardas netinkamas!" << endl;
+        if (mok1.getPavarde() == "Pavardenis")
+        cout << "Pavarde tinkama!" << endl;
+        else
+        cout << "Pavarde netinkama!" << endl;
+        if (mok1.getNd() == temp)
+        cout << "Namu darbai tinkami!" << endl;
+        else
+        cout << "Namu darbai netinkami!" << endl;
+        if (mok1.getEg() == 9)
+        cout << "Egzaminas tinkamas!"<< endl;
+        else
+        cout << "Egzaminas netinkamas!" << endl;
+        if (mok1.getGalutinis() == 8)
+        cout << "Vidurkis tinkamas!" << endl;
+        else
+        cout << "Vidurkis netinkamas!" << endl;
+        if (mok1.getMediana() == 7)
+        cout << "Mediana tinkama!" << endl;
+        else
+        cout << "Mediana netinkama!" << endl;
+}
+    void testMoveConstructor()
+{
+        vector<double> temp{1, 2, 3, 4};
+        Studentas mok("Vardenis", "Pavardenis", temp, 9, 8, 7);
+        Studentas mok1 = move(mok);
+        if (mok1.getVardas() == "Vardenis")
+        cout << "Vardas tinkamas!" << endl;
+        else
+        cout << "Vardas netinkamas!" << endl;
+        if (mok1.getPavarde() == "Pavardenis")
+        cout << "Pavarde tinkama!" << endl;
+        else
+        cout << "Pavarde netinkama!" << endl;
+        if (mok1.getNd() == temp)
+        cout << "Namu darbai tinkami!" << endl;
+        else
+        cout << "Namu darbai netinkami!" << endl;
+        if (mok1.getEg() == 9)
+        cout << "Egzaminas tinkamas!" << endl;
+        else
+        cout << "Egzaminas netinkamas!" << endl;
+        if (mok1.getGalutinis() == 8)
+        cout << "Vidurkis tinkamas!" << endl;
+        else
+        cout << "Vidurkis netinkamas!" << endl;
+        if (mok1.getMediana() == 7)
+        cout << "Mediana tinkama!" << endl;
+        else
+        cout << "Mediana netinkama!" << endl;
+}
+    void testCopyAssignment()
+{
+        vector<double> temp{1, 2, 3, 4};
+        Studentas mok("Vardenis", "Pavardenis", temp, 9, 8, 7);
+        Studentas mok1;
+        mok1 = mok;
+        if (mok1.getVardas() == "Vardenis")
+        cout << "Vardas tinkamas!" << endl;
+        else
+        cout << "Vardas netinkamas!" << endl;
+        if (mok1.getPavarde() == "Pavardenis")
+        cout << "Pavarde tinkama!" << endl;
+        else
+        cout << "Pavarde netinkama!" << endl;
+        if (mok1.getNd() == temp)
+        cout << "Namu darbai tinkami!" << endl;
+        else
+        cout << "Namu darbai netinkami!" << endl;
+        if (mok1.getEg() == 9)
+        cout << "Egzaminas tinkamas!" << endl;
+        else
+        cout << "Egzaminas netinkamas!" << endl;
+        if (mok1.getGalutinis() == 8)
+        cout << "Vidurkis tinkamas!" << endl;
+        else
+        cout << "Vidurkis netinkamas!" << endl;
+        if (mok1.getMediana() == 7)
+        cout << "Mediana tinkama!" << endl;
+        else
+        cout << "Mediana netinkama!" << endl;
+}
+    void testMoveAssignment()
+{
+        vector<double> temp{1, 2, 3, 4};
+        Studentas mok("Vardenis", "Pavardenis", temp, 9, 8, 7);
+        Studentas mok1;
+        mok1 = move(mok);
+        if (mok1.getVardas() == "Vardenis")
+        cout << "Vardas tinkamas!" << endl;
+        else
+        cout << "Vardas netinkamas!" << endl;
+        if (mok1.getPavarde() == "Pavardenis")
+        cout << "Pavarde tinkama!" << endl;
+        else
+        cout << "Pavarde netinkama!" << endl;
+        if (mok1.getNd() == temp)
+        cout << "Namu darbai tinkami!" << endl;
+        else
+        cout << "Namu darbai netinkami!" << endl;
+        if (mok1.getEg() == 9)
+        cout << "Egzaminas tinkamas!" << endl;
+        else
+        cout << "Egzaminas netinkamas!" << endl;
+        if (mok1.getGalutinis() == 8)
+        cout << "Vidurkis tinkamas!" << endl;
+        else
+        cout << "Vidurkis netinkamas!" << endl;
+        if (mok1.getMediana() == 7)
+        cout << "Mediana tinkama!" << endl;
+        else
+        cout << "Mediana netinkama!" << endl;
+}
