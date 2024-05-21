@@ -188,7 +188,7 @@ Vektorius sukategorizavo 1000000 per 0.289064 s
 
 ## Failu dydziai:  
 
-| Dydis (KB) | O1   | O2   | O3   |
+| Dydis (Kb) | O1   | O2   | O3   |
 |------------|------|------|------|
 | struct     | 287  | 291  | 289  |
 | class      | 281  | 283  | 286  |
