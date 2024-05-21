@@ -62,6 +62,8 @@ public:
         }
         return *this;
     }
+
+
     void setVardas( std::string vardas1){
         vardas = vardas1;
     };
@@ -129,6 +131,7 @@ public:
         }
         ndvid /= nd.size();
     }
+    // Input and Output Operators
     friend std::ostream& operator<<(std::ostream& os, const Studentas& studentas) {
         os << studentas.vardas << ' ' << studentas.pavarde << ' ';
         for (auto& grade : studentas.nd) {
@@ -147,6 +150,7 @@ public:
         return is;
     }
 };
+void testInputOutput();
 void testConstructor();
 void testCopyConstructor();
 void testMoveConstructor();
