@@ -309,6 +309,7 @@ int main() {
     testMoveConstructor();
     testCopyAssignment();
     testMoveAssignment();
+    testInputOutput();
          }
          else if (choice == 10) {
             break;
