@@ -367,3 +367,10 @@
         else
         cout << "Mediana netinkama!" << endl;
 }
+    void testInputOutput()
+{
+        istringstream mok("Vardenis pavardenis 1 2 3 4 5 9");
+        Studentas mok2;
+        mok >> mok2;
+        cout << "Nuskaityta is srauto i mok1: " << mok2 << endl;
+}
