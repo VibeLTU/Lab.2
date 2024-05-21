@@ -24,9 +24,9 @@ private:
 public:
     // Constructors
     Studentas() = default;
-    Studentas(const std::string& vardas1, const std::string& pavarde1, const std::vector<double>& nd1, double eg1) : vardas(vardas1), pavarde(pavarde1), nd(nd1), eg(eg1), ndvid(0), galutinis(0), mediana(0) {}
+    Studentas(std::string vardas1, std::string pavarde1, std::vector<double> nd1, double eg1, double galutinis1, double median1) : vardas(vardas1), pavarde(pavarde1), nd(nd1), eg(eg1), galutinis(galutinis1), mediana(median1) {}
 
-    // Destructor
+    //Distructor
     ~Studentas() = default;
 
     // Copy Constructor
@@ -147,7 +147,11 @@ public:
         return is;
     }
 };
-
+void testConstructor();
+void testCopyConstructor();
+void testMoveConstructor();
+void testCopyAssignment();
+void testMoveAssignment();
 double median(std::vector<double>& arr);
 void generuotiBalus(Studentas& studentas);
 void skaitytiIsFailo(std::vector<Studentas>& A,  std::string& failoPavadinimas);
