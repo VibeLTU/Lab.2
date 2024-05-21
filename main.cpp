@@ -13,7 +13,6 @@ using namespace std;
 int main() {
     int choice;
     vector<Studentas> A;
-
     while (true) {
         cout << "Pasirinkite veiksma: " << endl;
         cout << "1. Ivesti duomenis ranka" << endl;
@@ -24,7 +23,8 @@ int main() {
         cout << "6. Isvesti duomenis" << endl;
         cout << "7. Generuoti faila su studentais" << endl;
         cout << "8. Kategorizuoti studentus pagal galutini bala" << endl;
-        cout << "9. Baigti darba" << endl;
+        cout << "9. Patikrinti 1.2v" << endl;
+        cout << "10. Baigti darba" << endl;
         cout << "Jusu pasirinkimas: ";
         cin >> choice;
 
@@ -303,7 +303,14 @@ int main() {
             cout << "Rusiavimas uztruko: " << diff.count() << " s" << endl;
     rikiuotiStudentus(geri_studentai, blogi_studentai);
         }
-         else if (choice == 9) {
+         else if (choice == 9){
+    testConstructor();
+    testCopyConstructor();
+    testMoveConstructor();
+    testCopyAssignment();
+    testMoveAssignment();
+         }
+         else if (choice == 10) {
             break;
         } else {
             cout << "Pasirinkimas neteisingas. Bandykite dar karta." << endl;
