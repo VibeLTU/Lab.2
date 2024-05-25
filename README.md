@@ -188,7 +188,28 @@ Vektorius sukategorizavo 1000000 per 0.289064 s
 
 ## Failu dydziai:  
 
-| Dydis (Kb) | O1   | O2   | O3   |
+| Dydis (KB) | O1   | O2   | O3   |
 |------------|------|------|------|
 | struct     | 287  | 291  | 289  |
 | class      | 281  | 283  | 286  |
+
+## v1.2   
+
+### Pridėtos funkcijos v1.2:
+
+Yra relizuoti "Rule of five" metodai:     
+1. Destructor
+"Destructor" naudojamas pašalinti / atlaisvinti visus išteklius, kuriuos objektas paėmė per visą savo tarnavimo laiką.    
+2. Copy Constructor   
+"Copy Constructor" naudojamas naujam objektui sukurti kopijuojant esamą objektą. Kopijavimo konstruktorius iškviečiamas, kai jį naudojame norėdami perduoti objektą pagal vertę arba kai aiškiai padarome kopiją.   
+3. Copy Assignment Operator   
+"Copy Assignment Operator" yra specialus funkcijos tipas, kuris rūpinasi vieno objekto duomenų priskyrimu kitam objektui.   
+4. Move Constructor   
+"Move Constructor" yra viena iš nario funkcijų, naudojamų išteklių nuosavybei perduoti iš vieno objekto į kitą. Šį darbą šis judesio konstruktorius gali lengvai atlikti naudodamas laikiną objektą   
+5. Move Assignment Operator   
+"Move Assignment Operator" yra panašus į "Move Constructor". Jis naudojamas, kai esamam objektui priskiriama rvalue vertė.    
+
+Taip pat yra ir pridėti įvesties bei išvesties metodu persidengimai.   
+
+### Rule of five metodų foto:
+
