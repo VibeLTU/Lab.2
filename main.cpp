@@ -11,6 +11,15 @@
 using namespace std;
 
 int main() {
+    // Attempt to create an object of the abstract class Zmogus
+    // This should fail and result in a compilation error
+    // Zmogus z("Jonas", "Jonaitis"); // Uncommenting this line will cause a compilation error
+
+    // Successfully create an object of the derived class Studentas
+    Studentas s("Petras", "Petraitis", {9.5, 8.5, 10}, 9.0, 9.1, 9.5);
+
+    // Output the student's information
+    s.print();
     int choice;
     vector<Studentas> A;
     while (true) {
