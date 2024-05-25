@@ -213,3 +213,8 @@ Taip pat yra ir pridėti įvesties bei išvesties metodu persidengimai.
 
 ### Rule of five metodų foto:
 
+<img src="Rule_of_five.png">   
+
+### Įvesties bei išvesties metodai:
+
+<img src="Input_Output.png">
