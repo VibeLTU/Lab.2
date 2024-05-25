@@ -198,7 +198,7 @@ Vektorius sukategorizavo 1000000 per 0.289064 s
 ### Pridėtos funkcijos v1.2:
 
 Yra relizuoti "Rule of five" metodai:     
-1. Destructor
+1. Destructor   
 "Destructor" naudojamas pašalinti / atlaisvinti visus išteklius, kuriuos objektas paėmė per visą savo tarnavimo laiką.    
 2. Copy Constructor   
 "Copy Constructor" naudojamas naujam objektui sukurti kopijuojant esamą objektą. Kopijavimo konstruktorius iškviečiamas, kai jį naudojame norėdami perduoti objektą pagal vertę arba kai aiškiai padarome kopiją.   
