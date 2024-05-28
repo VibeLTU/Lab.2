@@ -12,7 +12,7 @@ using namespace std;
 
 int main() {
     // Attempt to create an object of the abstract class Zmogus
-    // This should fail and result in a compilation error
+    // Jeigu norite patestuoti, ar galima sukurti nauja zmogus klase, nuimkite "//" zenklus 16-oje eiluteje
     // Zmogus z("Jonas", "Jonaitis"); // Uncommenting this line will cause a compilation error
 
     // Successfully create an object of the derived class Studentas
