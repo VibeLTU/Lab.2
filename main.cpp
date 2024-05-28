@@ -13,12 +13,11 @@ using namespace std;
 int main() {
     // Bandymas sukurti abstrakciosios klases Zmogus objekta
     // Jeigu norite patestuoti, ar galima sukurti nauja zmogus klase, nuimkite "//" zenklus 16-oje eiluteje
-    // Zmogus z("Jonas", "Jonaitis"); // Uncommenting this line will cause a compilation error
+    // Zmogus z("Jonas", "Jonaitis"); // Panaikinus šios eilutės komentarą, bus padaryta kompiliavimo klaida
 
-    // Successfully create an object of the derived class Studentas
+    // Sekmingai sukurkite isvestinės klases Studentas objekta
     Studentas s("Petras", "Petraitis", {9.5, 8.5, 10}, 9.0, 9.1, 9.5);
 
-    // Output the student's information
     s.print();
     int choice;
     vector<Studentas> A;
