@@ -218,3 +218,8 @@ Taip pat yra ir pridėti įvesties bei išvesties metodu persidengimai.
 ### Įvesties bei išvesties metodai:
 
 <img src="Input_Output.png">
+
+## v1.5   
+
+### Pakeitimai:   
+Vietoj vienos klasės "Studentai" yra dabar sukurtos dvi: bazinė klasė "Zmogus" (abstrakti, joje objektų kurti negalima) ir jos išvestinė klasė "Studentas".
